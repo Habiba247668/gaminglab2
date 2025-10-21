@@ -13,15 +13,18 @@ public class PlayerControl : MonoBehaviour
     public float groundCheckRadius;
     public LayerMask whatIsGround;
     private bool grounded;
-
+    private Animator anim;
     void Start()
     {
-        
+         anim = GetComponent<Animator>();
     }
 
  
     void Update()
     {
+        anim.SetFloat("Speed",Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x));
+        anim.SetFloat("Height", GetComponent<Rigidbody2D>().velocity.y);
+        anim.SetBool ("Ground", grounded);
         if (Input.GetKeyDown(Spacebar) && grounded){
             Jump();
         }
